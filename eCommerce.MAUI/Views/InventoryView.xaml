@@ -4,6 +4,7 @@
              x:Class="eCommerce.MAUI.Views.InventoryView"
              Title="InventoryView"
              NavigatedTo="ContentPage_NavigatedTo">
+    
     <VerticalStackLayout>
         <ListView
             ItemsSource="{Binding Products}"
