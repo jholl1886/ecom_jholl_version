@@ -52,15 +52,23 @@ namespace eCommerce.MAUI.ViewModels
         }
         public void DeleteProduct()
         {
-            if(SelectedProduct.Model == null)
+            if(SelectedProduct?.Model == null)
             {
                 return;
             }
 
             InventoryServiceProxy.Current.Delete(SelectedProduct.Model.Id); // got stuck here for awhile because we had to make instance of ProductViewModel and it was called "Model" to retrieve list of products Id's
-
-            
                 Refresh();
+        }
+
+        public void EditProduct()
+        {
+           if(SelectedProduct?.Model == null)
+            {
+                return;
+            }
+            Shell.Current.GoToAsync("//Product");
+
         }
     }
 }

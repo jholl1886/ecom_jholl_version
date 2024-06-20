@@ -22,7 +22,7 @@ public partial class InventoryView : ContentPage
 
     private void EditClicked(object sender, EventArgs e)
     {
-
+        (BindingContext as InventoryViewModel).EditProduct();
     }
 
     private void DeleteClicked(object sender, EventArgs e)
