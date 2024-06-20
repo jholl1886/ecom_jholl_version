@@ -14,9 +14,9 @@ public partial class ProductView : ContentPage
 		Shell.Current.GoToAsync("//Inventory");
     }
 
-    private void AddClicked(object sender, EventArgs e)
+    private void AddOrEditClicked(object sender, EventArgs e)
     {
-        (BindingContext as ProductViewModel).Add();
+        (BindingContext as ProductViewModel).AddOrEdit();
         Shell.Current.GoToAsync("//Inventory");
     }
 
@@ -24,4 +24,6 @@ public partial class ProductView : ContentPage
     {
         BindingContext = new ProductViewModel();
     }
+
+    
 }

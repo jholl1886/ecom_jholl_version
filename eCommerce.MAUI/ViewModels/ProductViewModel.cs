@@ -63,7 +63,7 @@ namespace eCommerce.MAUI.ViewModels
             }
         }
 
-        public void Add()
+        public void AddOrEdit()
         {
             if (Model != null)
             {

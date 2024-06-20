@@ -67,7 +67,8 @@ namespace eCommerce.MAUI.ViewModels
             {
                 return;
             }
-            Shell.Current.GoToAsync("//Product");
+            Shell.Current.GoToAsync($"//Product?productId={SelectedProduct.Model.Id}");
+            InventoryServiceProxy.Current.AddOrUpdate(SelectedProduct.Model);
 
         }
     }

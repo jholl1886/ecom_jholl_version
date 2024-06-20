@@ -29,7 +29,7 @@
             <Label Text="Quantity" Grid.Row="3" Grid.Column="0"/>
             <Entry Text="{Binding Model.Quantity}" Grid.Row="3" Grid.Column="1"/>
         </Grid>
-        <Button Text="Ok" Clicked="AddClicked"/>
+        <Button Text="Ok" Clicked="AddOrEditClicked"/>
         <Button Text="Cancel" Clicked="CancelClicked"/>
     </VerticalStackLayout>
 </ContentPage>
