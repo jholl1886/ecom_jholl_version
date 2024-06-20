@@ -20,6 +20,18 @@ public partial class InventoryView : ContentPage
         Shell.Current.GoToAsync("//Product");
     }
 
+    private void EditClicked(object sender, EventArgs e)
+    {
+
+    }
+
+    private void DeleteClicked(object sender, EventArgs e)
+    {
+        
+            (BindingContext as InventoryViewModel).DeleteProduct();
+       
+    }
+
     private void ContentPage_NavigatedTo(object sender, NavigatedToEventArgs e)
     {
         (BindingContext as InventoryViewModel)?.Refresh();

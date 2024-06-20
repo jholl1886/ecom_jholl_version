@@ -7,6 +7,7 @@
     <VerticalStackLayout>
         <ListView
             ItemsSource="{Binding Products}"
+            SelectedItem="{Binding SelectedProduct}"
             >
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -32,8 +33,17 @@
                 Clicked="AddClicked"
                 />
         <Button
+            Text="Edit Product"
+            Clicked="EditClicked"
+            />
+        <Button
+            Text="Delete Product"
+            Clicked="DeleteClicked"
+            
+            />
+        <Button
             Text="Cancel"
             Clicked="CancelClicked"
-            />
+    />
     </VerticalStackLayout>
 </ContentPage>

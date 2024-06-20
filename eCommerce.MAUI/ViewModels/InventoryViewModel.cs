@@ -1,5 +1,7 @@
 ﻿using Amazon.Library.Models;
 using Amazon.Library.Services;
+using eCommerce.MAUI.Views;
+using Microsoft.Extensions.Logging.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,11 +9,18 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+
+
 
 namespace eCommerce.MAUI.ViewModels
 {
     public class InventoryViewModel : INotifyPropertyChanged
     {
+
+        private ProductViewModel? _selectedProduct;
+
+        public Product? Product;
         public List<ProductViewModel> Products { 
             get {
                 return InventoryServiceProxy.Current.Products.Where(p=>p != null)
@@ -30,6 +39,28 @@ namespace eCommerce.MAUI.ViewModels
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+       public ProductViewModel? SelectedProduct
+        {
+            get => _selectedProduct;
+            set
+            {
+                _selectedProduct = value;
+                NotifyPropertyChanged();
+            }
+        }
+        public void DeleteProduct()
+        {
+            if(SelectedProduct.Model == null)
+            {
+                return;
+            }
+
+            InventoryServiceProxy.Current.Delete(SelectedProduct.Model.Id); // got stuck here for awhile because we had to make instance of ProductViewModel and it was called "Model" to retrieve list of products Id's
+
+            
+                Refresh();
         }
     }
 }

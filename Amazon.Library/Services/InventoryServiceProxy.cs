@@ -19,7 +19,7 @@ namespace Amazon.Library.Services
         {
             get
             {
-                return products.AsReadOnly();
+                return products.AsReadOnly(); 
             }
         }
 
@@ -51,6 +51,19 @@ namespace Amazon.Library.Services
             }
 
             return p;
+        }
+
+        public void Delete(int id) //wasnt here from Mills' GITHUB
+        {
+            if(products == null)
+            {
+                return;
+            }
+            var productToDelete = products.FirstOrDefault(p => p.Id == id);
+            if(productToDelete != null)
+            {
+                products.Remove(productToDelete);
+            }
         }
 
         private InventoryServiceProxy()
