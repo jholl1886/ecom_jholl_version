@@ -14,6 +14,7 @@ namespace eCommerce.MAUI.ViewModels
     {
         public ShopViewModel() {
             InventoryQuery = string.Empty;
+            Cart = new ShoppingCart();
         }
 
         private string inventoryQuery;
@@ -22,6 +23,7 @@ namespace eCommerce.MAUI.ViewModels
             {
                 inventoryQuery = value;
                 NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(Products));
             }
             get { return inventoryQuery; }
         }
@@ -36,8 +38,20 @@ namespace eCommerce.MAUI.ViewModels
             }
         }
 
-        //private Product productToBuy;
-        public Product ProductToBuy { get; set; } = new Product();
+        private ProductViewModel productToBuy;
+        public ProductViewModel ProductToBuy
+        {
+            get => productToBuy;
+            set
+            {
+                if (productToBuy != value)
+                {
+                    productToBuy = value;
+                    
+                    NotifyPropertyChanged();
+                }
+            }
+        }
 
         public ShoppingCart Cart { get; set; }
 
