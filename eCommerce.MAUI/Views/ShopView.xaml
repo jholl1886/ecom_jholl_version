@@ -33,7 +33,7 @@
                 <!-- Inventory -->
                 <ListView
                     ItemsSource="{Binding Products}"
-                    SelectedItem="{Binding ProductToBuy}"
+                    SelectedItem="{Binding ProductToBuy, Mode=TwoWay}" 
                     Grid.Column="0"
                     Grid.Row="1">
                     <ListView.ItemTemplate>
