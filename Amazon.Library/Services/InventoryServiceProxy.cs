@@ -39,10 +39,21 @@ namespace Amazon.Library.Services
         public Product AddOrUpdate(Product p)
         {
             bool isAdd = false;
-            if(p.Id == 0)
+            var existingProduct = products.FirstOrDefault(prod => prod.Id == p.Id);
+            if (existingProduct != null)
             {
-                isAdd = true;
-                p.Id = NextId;
+                existingProduct.Name = p.Name;
+                existingProduct.Price = p.Price;
+                existingProduct.Quantity = p.Quantity;
+            }
+
+            else
+            {
+                if (p.Id == 0)
+                {
+                    isAdd = true;
+                    p.Id = NextId;
+                }
             }
 
             if(isAdd)

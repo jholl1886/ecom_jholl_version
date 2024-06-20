@@ -18,7 +18,7 @@ namespace eCommerce.MAUI.ViewModels
     public class InventoryViewModel : INotifyPropertyChanged
     {
 
-        private ProductViewModel? _selectedProduct;
+        
 
         public Product? Product;
         public List<ProductViewModel> Products { 
@@ -41,15 +41,8 @@ namespace eCommerce.MAUI.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-       public ProductViewModel? SelectedProduct
-        {
-            get => _selectedProduct;
-            set
-            {
-                _selectedProduct = value;
-                NotifyPropertyChanged();
-            }
-        }
+       public ProductViewModel SelectedProduct { get; set; }
+        
         public void DeleteProduct()
         {
             if(SelectedProduct?.Model == null)
