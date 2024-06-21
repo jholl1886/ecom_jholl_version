@@ -9,6 +9,6 @@ namespace Amazon.Library.Models
     public class ShoppingCart
     {
         int Id { get; set; }
-        public List<Product>? Contents { get; set; }
+        public List<Product> Contents { get; set; } = new List<Product>();
     }
 }

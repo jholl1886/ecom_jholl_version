@@ -7,20 +7,20 @@
     <VerticalStackLayout>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition Height="10*"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
+
             <!-- Search box -->
-            <Grid Grid.Row="0">
+            <Grid Grid.Row="0" Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition Height="10*"/>
-                    <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0" Grid.Column="1">
                     <Grid.ColumnDefinitions>
@@ -30,11 +30,43 @@
                     <Entry Grid.Column="0" Text="{Binding InventoryQuery}"/>
                     <Button Grid.Column="1" Text="Search" Clicked="InventorySearchClicked"/>
                 </Grid>
+
                 <!-- Inventory -->
                 <ListView
                     ItemsSource="{Binding Products}"
                     SelectedItem="{Binding ProductToBuy, Mode=TwoWay}" 
-                    Grid.Column="0"
+                    Grid.Row="1" Grid.Column="0">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="5*"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Text="{Binding Model.Id}"/>
+                                    <Label Grid.Column="1" Text="{Binding DisplayPrice}"/>
+                                    <Label Grid.Column="2" Text="{Binding Model.Name}"/>
+                                    <Label Grid.Column="3" Text="{Binding Model.Quantity}"/>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+
+            <!-- Cart -->
+            <Grid Grid.Row="0" Grid.Column="1" Grid.RowSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Text="Shopping Cart" FontAttributes="Bold" HorizontalOptions="Center"/>
+                <!--<ListView 
+                    ItemsSource="{Binding Cart.Contents}" 
+                    SelectedItem="{Binding ProductToRemove, Mode=TwoWay}"
                     Grid.Row="1">
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -54,11 +86,12 @@
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
-                </ListView>
-            </Grid>
-            <!-- Cart -->
-            <Grid Grid.Row="0" Grid.Column="1">
-                <ListView ItemsSource="{Binding Cart.Contents}">
+                </ListView>-->
+                <!-- Simplified Cart ListView for debugging -->
+                <ListView 
+                    ItemsSource="{Binding CartContents}" 
+                    SelectedItem="{Binding ProductToRemove, Mode=TwoWay}"
+                    Grid.Row="1">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -66,23 +99,21 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
                                         <ColumnDefinition/>
-                                        <ColumnDefinition Width="5*"/>
+                                        <ColumnDefinition Width="5"/>
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
-
-                                    <Label Grid.Column="0" Text="{Binding Model.Id}"/>
+                                    <Label Grid.Column="0" Text="{Binding Id}"/>
                                     <Label Grid.Column="1" Text="{Binding DisplayPrice}"/>
-                                    <Label Grid.Column="2" Text="{Binding Model.Name}"/>
-                                    <Label Grid.Column="3" Text="{Binding Model.Quantity}"/>
+                                    <Label Grid.Column="2" Text="{Binding Name}"/>
+                                    <Label Grid.Column="3" Text="{Binding Quantity}"/>
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
             </Grid>
-            <Grid Grid.Row="1">
-                <Label Text=""/>
-            </Grid>
+
+            <!-- Action Buttons -->
             <Grid Grid.Row="2" Grid.ColumnSpan="2">
                 <Grid.RowDefinitions>
                     <RowDefinition/>

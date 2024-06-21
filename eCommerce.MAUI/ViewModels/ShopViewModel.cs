@@ -16,8 +16,11 @@ namespace eCommerce.MAUI.ViewModels
         public ShopViewModel() {
             InventoryQuery = string.Empty;
             Cart = ShoppingCartService.Current.Cart;
+            
+            NotifyPropertyChanged(nameof(CartContents));
         }
 
+        
         private string inventoryQuery;
         public string InventoryQuery {
             set
@@ -54,14 +57,27 @@ namespace eCommerce.MAUI.ViewModels
             }
         }
 
-        public ShoppingCart Cart { get; set; }
 
+       private ShoppingCart cart;
+       public ShoppingCart Cart
+        {
+            get => cart;
+            set
+            {
+                cart = value;
+                NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(CartContents));
+            }
+        }
+
+        public List<Product> CartContents => Cart?.Contents;
         public void Refresh()
         {
             InventoryQuery = string.Empty;
             NotifyPropertyChanged(nameof(Products));
             NotifyPropertyChanged(nameof(ProductToBuy));
-            NotifyPropertyChanged(nameof(Cart.Contents));
+            
+            NotifyPropertyChanged(nameof(CartContents));
         }
 
         public void Search()
@@ -77,11 +93,8 @@ namespace eCommerce.MAUI.ViewModels
                 return;
             }
             ShoppingCartService.Current.AddToCart(ProductToBuy.Model);
-            NotifyPropertyChanged(nameof(Cart.Contents));
-            if(Cart.Contents != null)
-            {
-                Refresh();
-            }
+            Refresh();
+            
 
         }
 
