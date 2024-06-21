@@ -2,6 +2,7 @@
 using Amazon.Library.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -14,7 +15,7 @@ namespace eCommerce.MAUI.ViewModels
     {
         public ShopViewModel() {
             InventoryQuery = string.Empty;
-            Cart = new ShoppingCart();
+            Cart = ShoppingCartService.Current.Cart;
         }
 
         private string inventoryQuery;
@@ -60,6 +61,7 @@ namespace eCommerce.MAUI.ViewModels
             InventoryQuery = string.Empty;
             NotifyPropertyChanged(nameof(Products));
             NotifyPropertyChanged(nameof(ProductToBuy));
+            NotifyPropertyChanged(nameof(Cart.Contents));
         }
 
         public void Search()
@@ -67,10 +69,20 @@ namespace eCommerce.MAUI.ViewModels
             NotifyPropertyChanged(nameof(Products));
         }
 
+        
         public void PlaceInCart()
         {
-            //remove from Inventory
-            //add to Cart
+            if (ProductToBuy?.Model == null)
+            {
+                return;
+            }
+            ShoppingCartService.Current.AddToCart(ProductToBuy.Model);
+            NotifyPropertyChanged(nameof(Cart.Contents));
+            if(Cart.Contents != null)
+            {
+                Refresh();
+            }
+
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
