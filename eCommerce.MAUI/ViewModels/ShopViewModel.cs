@@ -13,11 +13,13 @@ namespace eCommerce.MAUI.ViewModels
 {
     public class ShopViewModel : INotifyPropertyChanged
     {
-        public ShopViewModel() {
+        public ShopViewModel() 
+        {
             InventoryQuery = string.Empty;
             Cart = ShoppingCartService.Current.Cart;
             CartPrice = ShoppingCartService.Current.Cart.Price;
             NotifyPropertyChanged(nameof(CartContents));
+            NotifyPropertyChanged(nameof(CartPrice));
         }
 
         
@@ -85,12 +87,14 @@ namespace eCommerce.MAUI.ViewModels
             }
         }
 
-        public List<Product> CartContents => Cart?.Contents;
+        //public List<Product> CartContents => Cart?.Contents; something about needing to convert carts products to product view models
+        public List<ProductViewModel> CartContents => Cart?.Contents .Select(p => new ProductViewModel(p)).ToList();
         public void Refresh()
         {
             InventoryQuery = string.Empty;
             NotifyPropertyChanged(nameof(Products));
             NotifyPropertyChanged(nameof(ProductToBuy));
+            CartPrice = ShoppingCartService.Current.Cart.Price;
             NotifyPropertyChanged(nameof(CartPrice));
             NotifyPropertyChanged(nameof(CartContents));
         }
@@ -108,6 +112,8 @@ namespace eCommerce.MAUI.ViewModels
                 return;
             }
             ShoppingCartService.Current.AddToCart(ProductToBuy.Model);
+            CartPrice = ShoppingCartService.Current.Cart.Price; // Update CartPrice after adding to cart
+            NotifyPropertyChanged(nameof(CartPrice));
             Refresh();
             
 
