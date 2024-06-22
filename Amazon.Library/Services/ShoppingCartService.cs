@@ -137,23 +137,31 @@ namespace Amazon.Library.Services
 
             var inventoryProduct = InventoryServiceProxy.Current.Products
                 .FirstOrDefault(invProd => invProd.Id == newProduct.Id);
-            if (inventoryProduct == null)
+
+            if (inventoryProduct == null || inventoryProduct.Quantity <= 0)
             {
+                // Not enough inventory or product doesn't exist
                 return;
             }
 
-            inventoryProduct.Quantity -= newProduct.Quantity;
-
             if (existingProduct != null)
             {
-                // update
-                existingProduct.Quantity += newProduct.Quantity;
+                
+                existingProduct.Quantity += 1;
             }
             else
             {
-                // add
-                Cart.Contents.Add(newProduct);
+                Cart.Contents.Add(new Product
+                {
+                    Id = newProduct.Id,
+                    Name = newProduct.Name,
+                    Quantity = 1,
+                    Price = newProduct.Price
+                });
             }
+
+            
+            inventoryProduct.Quantity -= 1; //makes sense this needed to be last
         }
     }
 }
