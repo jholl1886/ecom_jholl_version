@@ -63,7 +63,10 @@
                     <RowDefinition/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Label Text="Shopping Cart" FontAttributes="Bold" HorizontalOptions="Center"/>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Shopping Cart Total:" FontAttributes="Bold"/>
+                    <Label Text="{Binding CartPrice, StringFormat='{}{0:C}'}" FontAttributes="Bold"/>
+                </StackLayout>
                 <!--<ListView 
                     ItemsSource="{Binding Cart.Contents}" 
                     SelectedItem="{Binding ProductToRemove, Mode=TwoWay}"

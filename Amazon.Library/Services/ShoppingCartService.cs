@@ -162,6 +162,12 @@ namespace Amazon.Library.Services
 
             
             inventoryProduct.Quantity -= 1; //makes sense this needed to be last
+            UpdateCartPrice();
+        }
+
+        private void UpdateCartPrice()
+        {
+            Cart.Price = Cart.Contents.Sum(product => product.Price * product.Quantity);
         }
     }
 }

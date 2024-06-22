@@ -10,7 +10,7 @@ namespace Amazon.Library.Models
     {
         int Id { get; set; }
 
-        Decimal Price { get; set; }
+        public decimal Price { get; set; } = 0;
 
         public List<Product> Contents { get; set; } = new List<Product>();
     }

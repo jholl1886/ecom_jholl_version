@@ -16,7 +16,7 @@ namespace eCommerce.MAUI.ViewModels
         public ShopViewModel() {
             InventoryQuery = string.Empty;
             Cart = ShoppingCartService.Current.Cart;
-            
+            CartPrice = ShoppingCartService.Current.Cart.Price;
             NotifyPropertyChanged(nameof(CartContents));
         }
 
@@ -57,8 +57,21 @@ namespace eCommerce.MAUI.ViewModels
             }
         }
 
+        private decimal cartPrice;
+        public decimal CartPrice
+        {
+            get => cartPrice;
+            set
+            {
+                if (cartPrice != value)
+                {
+                    cartPrice = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
 
-       private ShoppingCart cart;
+        private ShoppingCart cart;
        public ShoppingCart Cart
         {
             get => cart;
@@ -67,6 +80,8 @@ namespace eCommerce.MAUI.ViewModels
                 cart = value;
                 NotifyPropertyChanged();
                 NotifyPropertyChanged(nameof(CartContents));
+                NotifyPropertyChanged(nameof(CartPrice));
+
             }
         }
 
@@ -76,7 +91,7 @@ namespace eCommerce.MAUI.ViewModels
             InventoryQuery = string.Empty;
             NotifyPropertyChanged(nameof(Products));
             NotifyPropertyChanged(nameof(ProductToBuy));
-            
+            NotifyPropertyChanged(nameof(CartPrice));
             NotifyPropertyChanged(nameof(CartContents));
         }
 
