@@ -34,6 +34,6 @@ public partial class InventoryView : ContentPage
 
     private void ContentPage_NavigatedTo(object sender, NavigatedToEventArgs e)
     {
-        (BindingContext as InventoryViewModel)?.Refresh();
+        (BindingContext as InventoryViewModel).Refresh();
     }
 }

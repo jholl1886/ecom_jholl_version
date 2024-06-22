@@ -17,16 +17,21 @@ public partial class ShopView : ContentPage
 
     private void ContentPage_NavigatedTo(object sender, NavigatedToEventArgs e)
     {
-        (BindingContext as ShopViewModel)?.Refresh();
+        (BindingContext as ShopViewModel).Refresh();
     }
 
     private void InventorySearchClicked(object sender, EventArgs e)
     {
-        (BindingContext as ShopViewModel)?.Search();
+        (BindingContext as ShopViewModel).Search();
     }
 
     private void PlaceInCartClicked(object sender, EventArgs e)
     {
-        (BindingContext as ShopViewModel)?.PlaceInCart();
+        (BindingContext as ShopViewModel).PlaceInCart();
+    }
+
+    private void RemoveFromCart(object sender, EventArgs e)
+    {
+
     }
 }
