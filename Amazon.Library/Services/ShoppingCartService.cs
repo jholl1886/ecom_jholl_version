@@ -160,10 +160,21 @@ namespace Amazon.Library.Services
                 });
             }
 
-            
             inventoryProduct.Quantity -= 1; //makes sense this needed to be last
             UpdateCartPrice();
         }
+
+        public void RemoveFromCart(Product newProduct)
+        {
+            if (newProduct == null)
+            {
+                return;
+            }
+            //come back here to finish
+
+        }
+
+
 
         private void UpdateCartPrice()
         {

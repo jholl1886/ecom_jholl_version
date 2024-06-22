@@ -115,9 +115,13 @@ namespace eCommerce.MAUI.ViewModels
             CartPrice = ShoppingCartService.Current.Cart.Price; // Update CartPrice after adding to cart
             NotifyPropertyChanged(nameof(CartPrice));
             Refresh();
-            
-
         }
+
+        public void RemoveFromCart()
+        {
+            Refresh();
+        }
+
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
