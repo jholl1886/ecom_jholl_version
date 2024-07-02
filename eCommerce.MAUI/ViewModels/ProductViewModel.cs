@@ -31,6 +31,11 @@ namespace eCommerce.MAUI.ViewModels
 
         public string PriceAsString
         {
+            get
+            {
+                if (Model == null) { return string.Empty; }
+                return $"{Model.Price:C}";
+            }
             set
             {
                 if (Model == null)
