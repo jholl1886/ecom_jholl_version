@@ -18,6 +18,11 @@
         {
             Shell.Current.GoToAsync("//Shop");
         }
+
+        private void TaxClicked(object sender, EventArgs e)
+        {
+            Shell.Current.GoToAsync("//Tax");
+        }
     }
 
 }

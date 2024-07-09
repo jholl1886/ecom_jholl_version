@@ -24,5 +24,9 @@
         Title="Home"
         ContentTemplate="{DataTemplate views:ShopView}"
         Route="Shop" />
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate views:TaxView}"
+        Route="Tax" />
 
 </Shell>
