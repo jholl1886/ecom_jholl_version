@@ -157,7 +157,8 @@ namespace Amazon.Library.Services
                     Id = newProduct.Id,
                     Name = newProduct.Name,
                     Quantity = 1,
-                    Price = newProduct.Price
+                    Price = newProduct.Price,
+                    IsBogo = newProduct.IsBogo
                 });
             }
 
@@ -181,23 +182,44 @@ namespace Amazon.Library.Services
         {
             Cart.TaxRate = d;
             actualTaxRate = d / 100;
+            UpdateCartPrice();
         }
 
 
 
         private void UpdateCartPrice()
         {
-            if (actualTaxRate <= 0)
+            Cart.Price = 0;
+            foreach(var product in Cart.Contents)
             {
-                Cart.Price = Cart.Contents.Sum(product => product.Price * product.Quantity);
+                int amountOfProduct = product.Quantity;
+                if (product.IsBogo)
+                {
+                    Cart.Price += (amountOfProduct / 2) * product.Price + (amountOfProduct % 2) * product.Price;
+                }
+                else
+                {
+                    Cart.Price += amountOfProduct * product.Price;
+                }
+
             }
-            else
+            if (actualTaxRate > 0)
             {
-                Cart.Price = Cart.Contents.Sum(product => product.Price * product.Quantity);
                 decimal taxAmount = Cart.Price * actualTaxRate;
-                Cart.Price = taxAmount + Cart.Price;
+                Cart.Price += taxAmount;
             }
-            
+
+            //if (actualTaxRate <= 0)
+            //{
+            //    Cart.Price = Cart.Contents.Sum(product => product.Price * product.Quantity);
+            //}
+            //else
+            //{
+            //    Cart.Price = Cart.Contents.Sum(product => product.Price * product.Quantity);
+            //    decimal taxAmount = Cart.Price * actualTaxRate;
+            //    Cart.Price = taxAmount + Cart.Price;
+            //}
+
         }
     }
 }

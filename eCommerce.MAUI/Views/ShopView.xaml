@@ -69,29 +69,6 @@
                     <Label Text="Shopping Cart Total:" FontAttributes="Bold"/>
                     <Label Text="{Binding CartPrice,StringFormat='{}{0:C}'}" FontAttributes="Bold"/>
                 </StackLayout>
-                <!--<ListView 
-                    ItemsSource="{Binding Cart.Contents}" 
-                    SelectedItem="{Binding ProductToRemove, Mode=TwoWay}"
-                    Grid.Row="1">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition Width="5*"/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <Label Grid.Column="0" Text="{Binding Model.Id}"/>
-                                    <Label Grid.Column="1" Text="{Binding DisplayPrice}"/>
-                                    <Label Grid.Column="2" Text="{Binding Model.Name}"/>
-                                    <Label Grid.Column="3" Text="{Binding Model.Quantity}"/>
-                                </Grid>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>-->
                 <!-- Simplified Cart ListView for debugging -->
                 <ListView 
                     ItemsSource="{Binding CartContents}" 
@@ -106,11 +83,13 @@
                                         <ColumnDefinition/>
                                         <ColumnDefinition Width="5*"/>
                                         <ColumnDefinition/>
+                                        <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <Label Grid.Column="0" Text="{Binding Model.Id}"/>
                                     <Label Grid.Column="1" Text="{Binding DisplayPrice}"/>
                                     <Label Grid.Column="2" Text="{Binding Model.Name}"/>
                                     <Label Grid.Column="3" Text="{Binding Model.Quantity}"/>
+                                    <Label Grid.Column="4" Text="{Binding DisplayIsBogo}"/>
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>
