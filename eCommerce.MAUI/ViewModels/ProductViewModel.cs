@@ -95,7 +95,7 @@ namespace eCommerce.MAUI.ViewModels
             get
             {
                 if (Model == null) { return string.Empty; }
-                return Model.IsBogo ? "Yes" : "No";
+                return Model.IsBogo ? "Item is BoGo" : "Item is not BoGo";
             }
         }
 
