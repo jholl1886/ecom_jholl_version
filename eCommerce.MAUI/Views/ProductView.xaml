@@ -16,6 +16,7 @@
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
             <Label Text="Id" Grid.Row="0" Grid.Column="0"/>
             <Label Text="{Binding Model.Id}" Grid.Row="0" Grid.Column="1"/>
@@ -28,6 +29,12 @@
 
             <Label Text="Quantity" Grid.Row="3" Grid.Column="0"/>
             <Entry Text="{Binding Model.Quantity}" Grid.Row="3" Grid.Column="1"/>
+            
+            <Label Text="Buy One Get One?" Grid.Row="4" Grid.Column="0"/>
+            <HorizontalStackLayout Grid.Row="4" Grid.Column="1" HorizontalOptions="FillAndExpand">
+                <Button Text="Yes" Clicked="YesButtonClicked" HorizontalOptions="FillAndExpand"/>
+                <Button Text="No" Clicked="NoButtonClicked" HorizontalOptions="FillAndExpand"/>
+            </HorizontalStackLayout>
         </Grid>
         <Button Text="Ok" Clicked="AddOrEditClicked"/>
         <Button Text="Cancel" Clicked="CancelClicked"/>

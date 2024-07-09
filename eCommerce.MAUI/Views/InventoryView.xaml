@@ -19,12 +19,14 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="5*"/>
                                 <ColumnDefinition/>
+                                <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
                             <Label Grid.Column="0" Text="{Binding Model.Id}"/>
                             <Label Grid.Column="1" Text="{Binding DisplayPrice}"/>
                             <Label Grid.Column="2" Text="{Binding Model.Name}"/>
                             <Label Grid.Column="3" Text="{Binding Model.Quantity}"/>
+                            <Label Grid.Column="4" Text="{Binding DisplayIsBogo}"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>

@@ -26,7 +26,20 @@ public partial class ProductView : ContentPage
         Shell.Current.GoToAsync("//Inventory");
     }
 
-    private void ContentPage_NavigatedTo(object sender, NavigatedToEventArgs e)
+    private void YesButtonClicked(object sender, EventArgs e)
+    {
+        (BindingContext as ProductViewModel).SetBuyOneGetOne(true);
+    }
+
+    private void NoButtonClicked(object sender, EventArgs e)
+    {
+        (BindingContext as ProductViewModel).SetBuyOneGetOne(false);
+    }
+
+
+
+
+        private void ContentPage_NavigatedTo(object sender, NavigatedToEventArgs e)
     {
         BindingContext = new ProductViewModel(ProductId);
     }

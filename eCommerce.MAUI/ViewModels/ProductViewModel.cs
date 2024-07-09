@@ -84,5 +84,21 @@ namespace eCommerce.MAUI.ViewModels
                 InventoryServiceProxy.Current.AddOrUpdate(Model);
             }
         }
+
+        public void SetBuyOneGetOne(bool isBuyOneGetOne)
+        {
+            Model.IsBogo = isBuyOneGetOne;
+        }
+
+        public string DisplayIsBogo
+        {
+            get
+            {
+                if (Model == null) { return string.Empty; }
+                return Model.IsBogo ? "Yes" : "No";
+            }
+        }
+
+
     }
 }

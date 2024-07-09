@@ -81,9 +81,9 @@ namespace Amazon.Library.Services
         {
             //TODO: remove sample data on checkin
             products = new List<Product>{
-                new Product{Id = 1,Name = "Product 1", Price=1.75M, Quantity=1}
-                , new Product{Id = 2,Name = "Product 2", Price=10M, Quantity=10}
-                , new Product{Id = 3,Name = "Product 3", Price=137.11M, Quantity=100}
+                new Product{Id = 1,Name = "Product 1", Price=1.75M, Quantity=1, IsBogo = false}
+                , new Product{Id = 2,Name = "Product 2", Price=10M, Quantity=10,IsBogo = false}
+                , new Product{Id = 3,Name = "Product 3", Price=137.11M, Quantity=100, IsBogo = false}
             };
         }
 
