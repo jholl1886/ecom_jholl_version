@@ -18,9 +18,10 @@ namespace eCommerce.MAUI.ViewModels
             InventoryQuery = string.Empty;
             Cart = ShoppingCartService.Current.Cart;
             CartPrice = ShoppingCartService.Current.Cart.Price;
+            //CartTaxRate = ShoppingCartService.Current.Cart.TaxRate;
             NotifyPropertyChanged(nameof(CartContents));
             NotifyPropertyChanged(nameof(CartPrice));
-            //CartTaxRate = ShoppingCartService.Current.Cart.TaxRate;
+            
         }
 
         
@@ -73,6 +74,23 @@ namespace eCommerce.MAUI.ViewModels
                 }
             }
         }
+
+        //private decimal cartTaxRate;
+        //public decimal CartTaxRate
+        //{
+        //    get => cartTaxRate;
+        //    set
+        //    {
+        //        if (cartTaxRate; != value)
+        //        {
+        //            cartTaxRate; = value;
+        //            NotifyPropertyChanged();
+        //        }
+        //    }
+        //}
+
+
+
 
         private ShoppingCart cart;
        public ShoppingCart Cart
