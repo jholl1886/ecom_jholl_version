@@ -1,11 +1,16 @@
+using eCommerce.MAUI.ViewModels;
+
 namespace eCommerce.MAUI.Views;
 
 public partial class TaxView : ContentPage
 {
-	public TaxView()
+    public TaxView()
 	{
-		InitializeComponent();
-	}
+        InitializeComponent();
+        BindingContext = new TaxViewModel();
+    }
+
+    
 
     private void CancelClicked(object sender, EventArgs e)
     {
@@ -14,6 +19,6 @@ public partial class TaxView : ContentPage
 
     private void SetTaxClicked(object sender, EventArgs e)
     {
-
+        (BindingContext as TaxViewModel).SetTaxRate();
     }
 }

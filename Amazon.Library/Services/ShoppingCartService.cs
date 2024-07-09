@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -104,7 +105,7 @@ namespace Amazon.Library.Services
                 return cartList.First();
             }
         }
-
+        
         private ShoppingCartService()
         {
             cartList = new List<ShoppingCart>();
@@ -174,11 +175,29 @@ namespace Amazon.Library.Services
 
         }
 
+        //TAXES
+        public decimal actualTaxRate;
+        public void UpdateTaxRate(decimal d)
+        {
+            Cart.TaxRate = d;
+            actualTaxRate = d / 100;
+        }
+
 
 
         private void UpdateCartPrice()
         {
-            Cart.Price = Cart.Contents.Sum(product => product.Price * product.Quantity);
+            if (actualTaxRate <= 0)
+            {
+                Cart.Price = Cart.Contents.Sum(product => product.Price * product.Quantity);
+            }
+            else
+            {
+                Cart.Price = Cart.Contents.Sum(product => product.Price * product.Quantity);
+                decimal taxAmount = Cart.Price * actualTaxRate;
+                Cart.Price = taxAmount + Cart.Price;
+            }
+            
         }
     }
 }

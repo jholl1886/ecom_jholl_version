@@ -20,6 +20,7 @@ namespace eCommerce.MAUI.ViewModels
             CartPrice = ShoppingCartService.Current.Cart.Price;
             NotifyPropertyChanged(nameof(CartContents));
             NotifyPropertyChanged(nameof(CartPrice));
+            //CartTaxRate = ShoppingCartService.Current.Cart.TaxRate;
         }
 
         
@@ -121,6 +122,9 @@ namespace eCommerce.MAUI.ViewModels
         {
             Refresh();
         }
+
+        
+        
 
 
         public event PropertyChangedEventHandler? PropertyChanged;
