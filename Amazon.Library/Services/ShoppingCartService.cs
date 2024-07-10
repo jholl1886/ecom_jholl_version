@@ -174,7 +174,33 @@ namespace Amazon.Library.Services
             {
                 return;
             }
-            //come back here to finish
+
+
+            var existingProduct = Cart.Contents
+                .FirstOrDefault(existingProducts => existingProducts.Id == newProduct.Id);
+
+            if (existingProduct != null)
+            {
+                if (existingProduct.Quantity > 1)
+                {
+                    existingProduct.Quantity -= 1;
+                }
+                else
+                {
+                    Cart.Contents.Remove(existingProduct);
+                }
+
+                var inventoryProduct = InventoryServiceProxy.Current.Products
+                    .FirstOrDefault(invProd => invProd.Id == newProduct.Id);
+
+                if (inventoryProduct != null)
+                {
+                    inventoryProduct.Quantity += 1;
+                }
+
+                UpdateCartPrice();
+            }
+            
 
         }
 

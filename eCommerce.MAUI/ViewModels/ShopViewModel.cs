@@ -139,6 +139,7 @@ namespace eCommerce.MAUI.ViewModels
 
         public void RemoveFromCart()
         {
+            ShoppingCartService.Current.RemoveFromCart(ProductToBuy.Model);
             Refresh();
         }
 
