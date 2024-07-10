@@ -158,8 +158,10 @@ namespace Amazon.Library.Services
                     Name = newProduct.Name,
                     Quantity = 1,
                     Price = newProduct.Price,
-                    IsBogo = newProduct.IsBogo
-                });
+                    IsBogo = newProduct.IsBogo,
+                    MarkDown = newProduct.MarkDown
+                }); ;
+                
             }
 
             inventoryProduct.Quantity -= 1; //makes sense this needed to be last
@@ -187,19 +189,20 @@ namespace Amazon.Library.Services
 
 
 
-        private void UpdateCartPrice()
+        public void UpdateCartPrice()
         {
             Cart.Price = 0;
             foreach(var product in Cart.Contents)
             {
                 int amountOfProduct = product.Quantity;
+                decimal userPrice = product.Price - product.MarkDown;
                 if (product.IsBogo)
                 {
-                    Cart.Price += (amountOfProduct / 2) * product.Price + (amountOfProduct % 2) * product.Price;
+                    Cart.Price += (amountOfProduct / 2) * userPrice + (amountOfProduct % 2) * userPrice;
                 }
                 else
                 {
-                    Cart.Price += amountOfProduct * product.Price;
+                    Cart.Price += amountOfProduct * userPrice;
                 }
 
             }

@@ -45,6 +45,8 @@ namespace Amazon.Library.Services
                 existingProduct.Name = p.Name;
                 existingProduct.Price = p.Price;
                 existingProduct.Quantity = p.Quantity;
+                existingProduct.IsBogo = p.IsBogo;
+                existingProduct.MarkDown = p.MarkDown;
             }
 
             else

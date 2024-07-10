@@ -102,6 +102,7 @@ namespace eCommerce.MAUI.ViewModels
                 NotifyPropertyChanged();
                 NotifyPropertyChanged(nameof(CartContents));
                 NotifyPropertyChanged(nameof(CartPrice));
+                
 
             }
         }

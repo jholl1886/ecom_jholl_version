@@ -2,6 +2,7 @@
 using Amazon.Library.Services;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,15 @@ namespace eCommerce.MAUI.ViewModels
             {
                 if (Model == null) { return string.Empty; }
                 return $"{Model.Price:C}";
+            }
+        }
+
+        public string DisplayUserPrice
+        {
+            get
+            {
+                if (Model == null) { return string.Empty; }
+                return $"{(Model.Price - Model.MarkDown):C}";
             }
         }
 
@@ -88,6 +98,7 @@ namespace eCommerce.MAUI.ViewModels
         public void SetBuyOneGetOne(bool isBuyOneGetOne)
         {
             Model.IsBogo = isBuyOneGetOne;
+            
         }
 
         public string DisplayIsBogo
@@ -95,9 +106,21 @@ namespace eCommerce.MAUI.ViewModels
             get
             {
                 if (Model == null) { return string.Empty; }
-                return Model.IsBogo ? "Item is BoGo" : "Item is not BoGo";
+                return Model.IsBogo ? "Item is BoGo" : "";
             }
         }
+
+        public string DisplayMarkDown
+        {
+            get
+            {
+                if (Model == null) { return string.Empty; }
+                return Model.MarkDown > 0 ? "Sale!" : "";
+            }
+        }
+
+        //MarkDownStuff
+        
 
 
     }
