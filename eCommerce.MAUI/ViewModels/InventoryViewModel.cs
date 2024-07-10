@@ -32,6 +32,7 @@ namespace eCommerce.MAUI.ViewModels
         public void Refresh()
         {
             NotifyPropertyChanged(nameof(Products));
+            SelectedProduct = null;
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
