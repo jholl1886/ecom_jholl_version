@@ -9,6 +9,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition/>
@@ -99,9 +100,37 @@
                 </ListView>
             </Grid>
 
-            <!-- Action Buttons -->
-            <Grid Grid.Row="2" Grid.ColumnSpan="2">
+            <!-- Wishlist/Other Carts -->
+            <Grid Grid.Row="0" Grid.Column="2" Grid.RowSpan="2">
                 <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Wishlists:" FontAttributes="Bold"/>
+                </StackLayout>
+                <ListView 
+                    ItemsSource="{Binding Carts}" 
+                    SelectedItem="{Binding SelectedCart, Mode=TwoWay}"
+                    Grid.Row="1">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding Id}" />
+                                    <Button Text="Select" Command="{Binding Path=BindingContext.SelectCartCommand, Source={x:Reference Name=ShopView}}" CommandParameter="{Binding Id}" />
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+
+            <!-- Action Buttons -->
+            <Grid Grid.Row="2" Grid.ColumnSpan="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -116,6 +145,14 @@
                     Clicked="RemoveFromCartClicked"/>
                 <Button
                     Grid.Row="2"
+                    Text="Add New Cart"
+                    Clicked="AddNewCartClicked"/>   
+                <Button
+                    Grid.Row="3"
+                    Text="Change Cart"
+                    Clicked="ChangeCartClicked"/>
+                <Button
+                    Grid.Row="4"
                     Text="Cancel"
                     Clicked="CancelClicked"/>
             </Grid>

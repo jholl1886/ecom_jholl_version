@@ -61,6 +61,11 @@ namespace eCommerce.MAUI.ViewModels
             }
         }
 
+        //public List<ShopViewModel> Carts
+        //{
+           
+        //}
+
         private decimal cartPrice;
         public decimal CartPrice
         {
@@ -139,12 +144,22 @@ namespace eCommerce.MAUI.ViewModels
 
         public void RemoveFromCart()
         {
+            if (ProductToBuy?.Model == null)
+            {
+                return;
+            }
             ShoppingCartService.Current.RemoveFromCart(ProductToBuy.Model);
             Refresh();
         }
 
-        
-        
+        public void NewCart()
+        {
+            ShoppingCartService.Current.AddNewCart();
+        }
+
+
+
+
 
 
         public event PropertyChangedEventHandler? PropertyChanged;

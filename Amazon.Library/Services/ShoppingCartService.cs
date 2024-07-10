@@ -88,7 +88,7 @@ namespace Amazon.Library.Services
         private static ShoppingCartService? instance;
         private static readonly object instanceLock = new object();
 
-        private List<ShoppingCart> cartList;
+        public List<ShoppingCart> cartList;
 
         public List<ShoppingCart> Carts => cartList;
 
@@ -105,8 +105,23 @@ namespace Amazon.Library.Services
                 return cartList.First();
             }
         }
-        
-        private ShoppingCartService()
+
+
+
+        private int NextId
+        {
+            get
+            {
+                if (!cartList.Any())
+                {
+                    return 1;
+                }
+
+                return cartList.Select(p => p.Id).Max() + 1;
+            }
+        }
+
+        public ShoppingCartService()
         {
             cartList = new List<ShoppingCart>();
         }
@@ -124,6 +139,22 @@ namespace Amazon.Library.Services
                 }
                 return instance;
             }
+        }
+
+        public ShoppingCart AddNewCart()
+        {
+            var newCart = new ShoppingCart
+            {
+                Id = NextId,
+                Contents = new List<Product>()
+            };
+            cartList.Add(newCart);
+            return newCart;
+        }
+
+        public ShoppingCart? GetCartById(int id)
+        {
+            return cartList.FirstOrDefault(cart => cart.Id == id);
         }
 
         public void AddToCart(Product newProduct)
@@ -238,16 +269,6 @@ namespace Amazon.Library.Services
                 Cart.Price += taxAmount;
             }
 
-            //if (actualTaxRate <= 0)
-            //{
-            //    Cart.Price = Cart.Contents.Sum(product => product.Price * product.Quantity);
-            //}
-            //else
-            //{
-            //    Cart.Price = Cart.Contents.Sum(product => product.Price * product.Quantity);
-            //    decimal taxAmount = Cart.Price * actualTaxRate;
-            //    Cart.Price = taxAmount + Cart.Price;
-            //}
 
         }
     }

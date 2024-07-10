@@ -34,4 +34,15 @@ public partial class ShopView : ContentPage
     {
         (BindingContext as ShopViewModel).RemoveFromCart();
     }
+
+    private void ChangeCartClicked(object sender, EventArgs e)
+    {
+        //(BindingContext as ShopViewModel).ChangeCart();
+    }
+
+    private void AddNewCartClicked(object sender, EventArgs e)
+    {
+        (BindingContext as ShopViewModel).NewCart();
+    }
+
 }
