@@ -2,7 +2,6 @@
 using Amazon.Library.Services;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -18,15 +17,14 @@ namespace eCommerce.MAUI.ViewModels
             InventoryQuery = string.Empty;
             Cart = ShoppingCartService.Current.Cart;
             CartPrice = ShoppingCartService.Current.Cart.Price;
-            //CartTaxRate = ShoppingCartService.Current.Cart.TaxRate;
+            UpdateCarts();
             NotifyPropertyChanged(nameof(CartContents));
             NotifyPropertyChanged(nameof(CartPrice));
-            
         }
 
-        
         private string inventoryQuery;
-        public string InventoryQuery {
+        public string InventoryQuery
+        {
             set
             {
                 inventoryQuery = value;
@@ -35,6 +33,7 @@ namespace eCommerce.MAUI.ViewModels
             }
             get { return inventoryQuery; }
         }
+
         public List<ProductViewModel> Products
         {
             get
@@ -55,16 +54,10 @@ namespace eCommerce.MAUI.ViewModels
                 if (productToBuy != value)
                 {
                     productToBuy = value;
-                    
                     NotifyPropertyChanged();
                 }
             }
         }
-
-        //public List<ShopViewModel> Carts
-        //{
-           
-        //}
 
         private decimal cartPrice;
         public decimal CartPrice
@@ -80,25 +73,8 @@ namespace eCommerce.MAUI.ViewModels
             }
         }
 
-        //private decimal cartTaxRate;
-        //public decimal CartTaxRate
-        //{
-        //    get => cartTaxRate;
-        //    set
-        //    {
-        //        if (cartTaxRate; != value)
-        //        {
-        //            cartTaxRate; = value;
-        //            NotifyPropertyChanged();
-        //        }
-        //    }
-        //}
-
-
-
-
         private ShoppingCart cart;
-       public ShoppingCart Cart
+        public ShoppingCart Cart
         {
             get => cart;
             set
@@ -107,13 +83,22 @@ namespace eCommerce.MAUI.ViewModels
                 NotifyPropertyChanged();
                 NotifyPropertyChanged(nameof(CartContents));
                 NotifyPropertyChanged(nameof(CartPrice));
-                
-
             }
         }
 
-        //public List<Product> CartContents => Cart?.Contents; something about needing to convert carts products to product view models
-        public List<ProductViewModel> CartContents => Cart?.Contents .Select(p => new ProductViewModel(p)).ToList();
+        private List<ShoppingCart> carts;
+        public List<ShoppingCart> Carts
+        {
+            get => carts;
+            set
+            {
+                carts = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public List<ProductViewModel> CartContents => Cart?.Contents.Select(p => new ProductViewModel(p)).ToList();
+
         public void Refresh()
         {
             InventoryQuery = string.Empty;
@@ -122,6 +107,7 @@ namespace eCommerce.MAUI.ViewModels
             CartPrice = ShoppingCartService.Current.Cart.Price;
             NotifyPropertyChanged(nameof(CartPrice));
             NotifyPropertyChanged(nameof(CartContents));
+            UpdateCarts();
         }
 
         public void Search()
@@ -129,7 +115,6 @@ namespace eCommerce.MAUI.ViewModels
             NotifyPropertyChanged(nameof(Products));
         }
 
-        
         public void PlaceInCart()
         {
             if (ProductToBuy?.Model == null)
@@ -137,7 +122,7 @@ namespace eCommerce.MAUI.ViewModels
                 return;
             }
             ShoppingCartService.Current.AddToCart(ProductToBuy.Model);
-            CartPrice = ShoppingCartService.Current.Cart.Price; // Update CartPrice after adding to cart
+            CartPrice = ShoppingCartService.Current.Cart.Price;
             NotifyPropertyChanged(nameof(CartPrice));
             Refresh();
         }
@@ -155,12 +140,14 @@ namespace eCommerce.MAUI.ViewModels
         public void NewCart()
         {
             ShoppingCartService.Current.AddNewCart();
+            UpdateCarts(); // Update the carts collection
         }
 
-
-
-
-
+        private void UpdateCarts()
+        {
+            Carts = new List<ShoppingCart>(ShoppingCartService.Current.Carts);
+            NotifyPropertyChanged(nameof(Carts));
+        }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 

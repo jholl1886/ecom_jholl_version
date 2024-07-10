@@ -146,7 +146,7 @@ namespace Amazon.Library.Services
             var newCart = new ShoppingCart
             {
                 Id = NextId,
-                Contents = new List<Product>()
+ 
             };
             cartList.Add(newCart);
             return newCart;

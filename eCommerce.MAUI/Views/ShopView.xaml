@@ -118,7 +118,6 @@
                             <ViewCell>
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="{Binding Id}" />
-                                    <Button Text="Select" Command="{Binding Path=BindingContext.SelectCartCommand, Source={x:Reference Name=ShopView}}" CommandParameter="{Binding Id}" />
                                 </StackLayout>
                             </ViewCell>
                         </DataTemplate>
