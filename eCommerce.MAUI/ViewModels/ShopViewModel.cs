@@ -59,6 +59,23 @@ namespace eCommerce.MAUI.ViewModels
             }
         }
 
+        private ShoppingCart selectedCart;
+
+        public ShoppingCart SelectedCart
+        {
+            get => selectedCart;
+            set
+            {
+                if (selectedCart != value)
+                {
+                    
+                    selectedCart = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+
         private decimal cartPrice;
         public decimal CartPrice
         {
