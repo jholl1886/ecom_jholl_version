@@ -157,6 +157,8 @@ namespace Amazon.Library.Services
             return cartList.FirstOrDefault(cart => cart.Id == id);
         }
 
+         
+
         public void AddToCart(Product newProduct)
         {
             if (newProduct == null)
@@ -233,6 +235,16 @@ namespace Amazon.Library.Services
             }
             
 
+        }
+
+        public void ChangeCurrentCart(int cartId)
+        {
+            var newCart = GetCartById(cartId);
+            if (newCart != null)
+            {
+                cartList.Remove(newCart);
+                cartList.Insert(0, newCart); // Move the selected cart to the first position
+            }
         }
 
         //TAXES

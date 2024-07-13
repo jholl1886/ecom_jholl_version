@@ -68,15 +68,14 @@ namespace Amazon.Library.Services
 
         public void Delete(int id) //wasnt here from Mills' GITHUB
         {
-            if(products == null)
+            var productToDelete = products.FirstOrDefault(p => p.Id == id);
+            if (products == null)
             {
                 return;
             }
-            var productToDelete = products.FirstOrDefault(p => p.Id == id);
-            if(productToDelete != null)
-            {
-                products.Remove(productToDelete);
-            }
+            products.Remove(productToDelete);
+            //return productToDelete; //when this becomes dto do this
+            
         }
 
         private InventoryServiceProxy()

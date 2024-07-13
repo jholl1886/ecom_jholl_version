@@ -154,6 +154,16 @@ namespace eCommerce.MAUI.ViewModels
             Refresh();
         }
 
+        public void ChangeCart()
+        {
+            if (SelectedCart == null) return;
+
+            ShoppingCartService.Current.ChangeCurrentCart(SelectedCart.Id);
+            Cart = ShoppingCartService.Current.Cart;
+            Refresh();
+
+        }
+
         public void NewCart()
         {
             ShoppingCartService.Current.AddNewCart();
