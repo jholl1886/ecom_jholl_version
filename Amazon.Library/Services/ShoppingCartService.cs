@@ -243,7 +243,7 @@ namespace Amazon.Library.Services
             if (newCart != null)
             {
                 cartList.Remove(newCart);
-                cartList.Insert(0, newCart); // Move the selected cart to the first position
+                cartList.Insert(0, newCart); 
             }
         }
 
