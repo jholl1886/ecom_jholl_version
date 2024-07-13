@@ -12,7 +12,7 @@ namespace Amazon.Library.Models
 
         public decimal Price { get; set; } = 0;
 
-        public decimal TaxRate { get; set; } = 0;
+        
         public List<Product> Contents { get; set; } = new List<Product>();
     }
 }

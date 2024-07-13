@@ -13,7 +13,7 @@ namespace eCommerce.MAUI.ViewModels
 
         public TaxViewModel()
         {
-            TaxRate = ShoppingCartService.Current.Cart.TaxRate;
+            TaxRate = ShoppingCartService.Current.TaxRate;
         }
 
         private decimal taxRate;

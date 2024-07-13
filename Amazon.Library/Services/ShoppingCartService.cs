@@ -90,6 +90,7 @@ namespace Amazon.Library.Services
 
         public List<ShoppingCart> cartList;
 
+        public decimal TaxRate { get; set; } = 0;
         public List<ShoppingCart> Carts => cartList;
 
         public ShoppingCart Cart
@@ -251,7 +252,7 @@ namespace Amazon.Library.Services
         public decimal actualTaxRate;
         public void UpdateTaxRate(decimal d)
         {
-            Cart.TaxRate = d;
+            TaxRate = d;
             actualTaxRate = d / 100;
             UpdateCartPrice();
         }
