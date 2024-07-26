@@ -26,47 +26,12 @@ namespace Amazon.Library.Services
             }
         }
 
-        private int NextId
+      
+
+        public async Task<ProductDTO> AddOrUpdate(ProductDTO p)
         {
-            get
-            {
-                if(!products.Any())
-                {
-                    return 1;
-                }
-
-                return products.Select(p => p.Id).Max() + 1;
-            }
-        }
-
-        public ProductDTO AddOrUpdate(ProductDTO p)
-        {
-            bool isAdd = false;
-            var existingProduct = products.FirstOrDefault(prod => prod.Id == p.Id);
-            if (existingProduct != null)
-            {
-                existingProduct.Name = p.Name;
-                existingProduct.Price = p.Price;
-                existingProduct.Quantity = p.Quantity;
-                existingProduct.IsBogo = p.IsBogo;
-                existingProduct.MarkDown = p.MarkDown;
-            }
-
-            else
-            {
-                if (p.Id == 0)
-                {
-                    isAdd = true;
-                    p.Id = NextId;
-                }
-            }
-
-            if(isAdd)
-            {
-                products.Add(p);
-            }
-
-            return p;
+            var result = await new WebRequestHandler().Post("/Inventory",p);
+            return JsonConvert.DeserializeObject<ProductDTO>(result);
         }
 
         public void Delete(int id) //wasnt here from Mills' GITHUB

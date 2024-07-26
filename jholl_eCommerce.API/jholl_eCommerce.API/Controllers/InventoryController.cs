@@ -2,6 +2,7 @@
 using eCommerce.Library.DTO;
 using jholl_eCommerce.API.EC;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection.Metadata.Ecma335;
 
 namespace jholl_eCommerce.API.Controllers
 {
@@ -20,6 +21,12 @@ namespace jholl_eCommerce.API.Controllers
         public async Task<IEnumerable<ProductDTO>> Get()
         {//only ever one line of code here ever
             return await new InventoryEC().Get();
+        }
+
+        [HttpPost]
+        public async Task<ProductDTO> AddOrUpdate([FromBody] ProductDTO p)
+        {
+            return await new InventoryEC().AddOrUpdate(p);
         }
 
     }
