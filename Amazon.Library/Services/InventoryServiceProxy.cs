@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Amazon.Library.Services
 {
@@ -86,6 +87,10 @@ namespace Amazon.Library.Services
                 , new Product{Id = 2,Name = "Product 2", Price=10M, Quantity=10,IsBogo = false}
                 , new Product{Id = 3,Name = "Product 3", Price=137.11M, Quantity=100, IsBogo = false}
             };
+
+            //TODO add a webcall
+            var response = "I Just made a webcall";
+            products = JsonConvert.DeserializeObject<List<Product>>(response);
         }
 
         public static InventoryServiceProxy Current
