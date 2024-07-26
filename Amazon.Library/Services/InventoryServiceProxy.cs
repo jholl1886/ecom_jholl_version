@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Amazon.Library.Utilities;
 
 namespace Amazon.Library.Services
 {
@@ -81,15 +82,12 @@ namespace Amazon.Library.Services
 
         private InventoryServiceProxy()
         {
-            //TODO: remove sample data on checkin
-            products = new List<Product>{
-                new Product{Id = 1,Name = "Product 1", Price=1.75M, Quantity=1, IsBogo = false}
-                , new Product{Id = 2,Name = "Product 2", Price=10M, Quantity=10,IsBogo = false}
-                , new Product{Id = 3,Name = "Product 3", Price=137.11M, Quantity=100, IsBogo = false}
-            };
+            
+            
 
             //TODO add a webcall
-            var response = "I Just made a webcall";
+            
+            var response = new WebRequestHandler().Get("/Inventory").Result;
             products = JsonConvert.DeserializeObject<List<Product>>(response);
         }
 

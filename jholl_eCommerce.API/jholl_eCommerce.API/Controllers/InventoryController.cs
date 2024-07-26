@@ -1,4 +1,5 @@
 ﻿using Amazon.Library.Models;
+using jholl_eCommerce.API.EC;
 using Microsoft.AspNetCore.Mvc;
 
 namespace jholl_eCommerce.API.Controllers
@@ -15,13 +16,9 @@ namespace jholl_eCommerce.API.Controllers
 
 
         [HttpGet()]
-        public IEnumerable<Product> Get()
-        {
-            return new List<Product>{
-                new Product{Id = 1,Name = "Product 1", Price=1.75M, Quantity=1, IsBogo = false}
-                , new Product{Id = 2,Name = "Product 2", Price=10M, Quantity=10,IsBogo = false}
-                , new Product{Id = 3,Name = "Product 3", Price=137.11M, Quantity=100, IsBogo = false}
-            };
+        public async Task<IEnumerable<Product>> Get()
+        {//only ever one line of code here ever
+            return await new InventoryEC().Get();
         }
 
     }
