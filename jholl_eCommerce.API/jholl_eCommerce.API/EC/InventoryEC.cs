@@ -1,4 +1,5 @@
 ﻿using Amazon.Library.Models;
+using eCommerce.Library.DTO;
 using jholl_eCommerce.API.DataBase;
 
 namespace jholl_eCommerce.API.EC
@@ -11,9 +12,9 @@ namespace jholl_eCommerce.API.EC
             
         }
 
-        public async Task<IEnumerable<Product>> Get()
+        public async Task<IEnumerable<ProductDTO>> Get()
         {
-            return FakeDatabase.Products;
+            return FakeDatabase.Products.Take(100).Select(p => new ProductDTO(p));
         }
 
     }

@@ -1,4 +1,5 @@
 ﻿using Amazon.Library.Models;
+using eCommerce.Library.DTO;
 using jholl_eCommerce.API.EC;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,7 +17,7 @@ namespace jholl_eCommerce.API.Controllers
 
 
         [HttpGet()]
-        public async Task<IEnumerable<Product>> Get()
+        public async Task<IEnumerable<ProductDTO>> Get()
         {//only ever one line of code here ever
             return await new InventoryEC().Get();
         }

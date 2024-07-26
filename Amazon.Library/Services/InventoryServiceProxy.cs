@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Amazon.Library.Utilities;
+using eCommerce.Library.DTO;
 
 namespace Amazon.Library.Services
 {
@@ -15,9 +16,9 @@ namespace Amazon.Library.Services
         private static InventoryServiceProxy? instance;
         private static object instanceLock = new object();
 
-        private List<Product> products;
+        private List<ProductDTO> products;
 
-        public ReadOnlyCollection<Product> Products
+        public ReadOnlyCollection<ProductDTO> Products
         {
             get
             {
@@ -38,7 +39,7 @@ namespace Amazon.Library.Services
             }
         }
 
-        public Product AddOrUpdate(Product p)
+        public ProductDTO AddOrUpdate(ProductDTO p)
         {
             bool isAdd = false;
             var existingProduct = products.FirstOrDefault(prod => prod.Id == p.Id);
@@ -88,7 +89,7 @@ namespace Amazon.Library.Services
             //TODO add a webcall
             
             var response = new WebRequestHandler().Get("/Inventory").Result;
-            products = JsonConvert.DeserializeObject<List<Product>>(response);
+            products = JsonConvert.DeserializeObject<List<ProductDTO>>(response);
         }
 
         public static InventoryServiceProxy Current

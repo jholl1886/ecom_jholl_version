@@ -1,4 +1,5 @@
 ﻿using Amazon.Library.Models;
+using eCommerce.Library.DTO;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -99,7 +100,7 @@ namespace Amazon.Library.Services
             {
                 if (!cartList.Any())
                 {
-                    var newCart = new ShoppingCart { Contents = new List<Product>() };
+                    var newCart = new ShoppingCart { Contents = new List<ProductDTO>() };
                     cartList.Add(newCart);
                     return newCart;
                 }
@@ -160,7 +161,7 @@ namespace Amazon.Library.Services
 
          
 
-        public void AddToCart(Product newProduct)
+        public void AddToCart(ProductDTO newProduct)
         {
             if (newProduct == null)
             {
@@ -186,7 +187,7 @@ namespace Amazon.Library.Services
             }
             else
             {
-                Cart.Contents.Add(new Product
+                Cart.Contents.Add(new ProductDTO
                 {
                     Id = newProduct.Id,
                     Name = newProduct.Name,
@@ -202,7 +203,7 @@ namespace Amazon.Library.Services
             UpdateCartPrice();
         }
 
-        public void RemoveFromCart(Product newProduct)
+        public void RemoveFromCart(ProductDTO newProduct)
         {
             if (newProduct == null)
             {
