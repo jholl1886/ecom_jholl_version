@@ -1,0 +1,6 @@
+@jholl_eCommerce.API_HostAddress = http://localhost:5211
+
+GET {{jholl_eCommerce.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
