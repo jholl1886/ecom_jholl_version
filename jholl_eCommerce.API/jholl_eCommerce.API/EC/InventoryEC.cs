@@ -59,5 +59,15 @@ namespace jholl_eCommerce.API.EC
             return new ProductDTO(productToDelete); //when this becomes dto do this
         }
 
+        public async Task<IEnumerable<ProductDTO>> Search(string? query)
+        {
+            return FakeDatabase.Products
+            .Where(p => p.Name != null && 
+             p.Name.ToUpper().Contains(query?.ToUpper() ?? string.Empty)  ||
+              (p.Description != null && p.Description.ToUpper().Contains(query?.ToUpper() ?? string.Empty)))
+            .Take(100)
+            .Select(p => new ProductDTO(p));
+        }
+
     }
 }

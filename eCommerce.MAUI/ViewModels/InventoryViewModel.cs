@@ -1,5 +1,6 @@
 ﻿using Amazon.Library.Models;
 using Amazon.Library.Services;
+using eCommerce.Library.DTO;
 using eCommerce.MAUI.Views;
 using Microsoft.Extensions.Logging.Abstractions;
 using System;
@@ -18,7 +19,7 @@ namespace eCommerce.MAUI.ViewModels
     public class InventoryViewModel : INotifyPropertyChanged
     {
 
-        
+        public string Query { get; set; }
 
         public Product? Product;
         public List<ProductViewModel> Products { 
@@ -66,6 +67,12 @@ namespace eCommerce.MAUI.ViewModels
             InventoryServiceProxy.Current.AddOrUpdate(SelectedProduct.Model);
             Refresh();
 
+        }
+
+        public async void Search()
+        {
+            await InventoryServiceProxy.Current.Search(new Query(Query));
+            Refresh();
         }
     }
 }

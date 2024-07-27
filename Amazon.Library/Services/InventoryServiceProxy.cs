@@ -22,7 +22,7 @@ namespace Amazon.Library.Services
         {
             get
             {
-                return products.AsReadOnly(); 
+                return products.AsReadOnly();
             }
         }
 
@@ -35,11 +35,11 @@ namespace Amazon.Library.Services
             return products;
         }
 
-      
+
 
         public async Task<ProductDTO> AddOrUpdate(ProductDTO p)
         {
-            var result = await new WebRequestHandler().Post("/Inventory",p);
+            var result = await new WebRequestHandler().Post("/Inventory", p);
             return JsonConvert.DeserializeObject<ProductDTO>(result);
         }
 
@@ -48,8 +48,22 @@ namespace Amazon.Library.Services
             var response = await new WebRequestHandler().Delete($"/{id}");
             var productToDelete = JsonConvert.DeserializeObject<ProductDTO>(response);
             return productToDelete; //when this becomes dto do this
-            
+
         }
+
+        public async Task<IEnumerable<ProductDTO>> Search(Query? query)
+        {
+            if(query == null || string.IsNullOrEmpty(query.QueryString))
+            {
+                return await Get();
+            }
+
+            var result = await new WebRequestHandler().Post("/Inventory/Search", query);
+            products = JsonConvert.DeserializeObject<List<ProductDTO>>(result) ?? new List<ProductDTO>();
+            return Products;
+        }
+            
+
 
         private InventoryServiceProxy()
         {

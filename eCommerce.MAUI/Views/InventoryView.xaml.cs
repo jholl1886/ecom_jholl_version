@@ -32,6 +32,11 @@ public partial class InventoryView : ContentPage
        
     }
 
+    private void SearchClicked(object sender, EventArgs e)
+    {
+        (BindingContext as InventoryViewModel)?.Search();
+    }
+
     private void ContentPage_NavigatedTo(object sender, NavigatedToEventArgs e)
     {
         (BindingContext as InventoryViewModel).Refresh();

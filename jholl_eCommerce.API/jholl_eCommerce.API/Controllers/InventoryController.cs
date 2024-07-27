@@ -35,5 +35,11 @@ namespace jholl_eCommerce.API.Controllers
             return await new InventoryEC().AddOrUpdate(p);
         }
 
+        [HttpPost("Search")]
+        public async Task<IEnumerable<ProductDTO>> Get(Query query)
+        {
+            return await new InventoryEC().Search(query.QueryString);
+        }
+
     }
 }
