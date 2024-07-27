@@ -43,15 +43,11 @@ namespace Amazon.Library.Services
             return JsonConvert.DeserializeObject<ProductDTO>(result);
         }
 
-        public void Delete(int id) //wasnt here from Mills' GITHUB
+        public async Task<ProductDTO>? Delete(int id) //wasnt here from Mills' GITHUB
         {
-            var productToDelete = products.FirstOrDefault(p => p.Id == id);
-            if (products == null)
-            {
-                return;
-            }
-            products.Remove(productToDelete);
-            //return productToDelete; //when this becomes dto do this
+            var response = await new WebRequestHandler().Delete($"/{id}");
+            var productToDelete = JsonConvert.DeserializeObject<ProductDTO>(response);
+            return productToDelete; //when this becomes dto do this
             
         }
 

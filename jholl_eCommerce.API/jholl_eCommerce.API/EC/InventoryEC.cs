@@ -48,5 +48,16 @@ namespace jholl_eCommerce.API.EC
             
         }
 
+        public async Task<ProductDTO> Delete(int id)
+        {
+            var productToDelete = FakeDatabase.Products.FirstOrDefault(p => p.Id == id);
+            if (productToDelete == null)
+            {
+                return null;
+            }
+            FakeDatabase.Products.Remove(productToDelete);
+            return new ProductDTO(productToDelete); //when this becomes dto do this
+        }
+
     }
 }

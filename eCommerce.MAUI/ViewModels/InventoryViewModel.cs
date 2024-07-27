@@ -45,14 +45,14 @@ namespace eCommerce.MAUI.ViewModels
 
        public ProductViewModel SelectedProduct { get; set; }
         
-        public void DeleteProduct()
+        public async void DeleteProduct()
         {
             if(SelectedProduct?.Model == null)
             {
                 return;
             }
 
-            InventoryServiceProxy.Current.Delete(SelectedProduct.Model.Id); // got stuck here for awhile because we had to make instance of ProductViewModel and it was called "Model" to retrieve list of products Id's
+            await InventoryServiceProxy.Current.Delete(SelectedProduct.Model.Id); // got stuck here for awhile because we had to make instance of ProductViewModel and it was called "Model" to retrieve list of products Id's
                 Refresh();
         }
 
