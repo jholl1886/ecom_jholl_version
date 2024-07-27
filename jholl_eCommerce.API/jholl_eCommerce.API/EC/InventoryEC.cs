@@ -14,13 +14,13 @@ namespace jholl_eCommerce.API.EC
 
         public async Task<IEnumerable<ProductDTO>> Get()
         {
-            return FakeDatabase.Products.Take(100).Select(p => new ProductDTO(p));
+            return Filebase.Current.Products.Take(100).Select(p => new ProductDTO(p));
         }
 
-        public async Task<ProductDTO> AddOrUpdate(ProductDTO p)
+        public async Task<ProductDTO> AddOrUpdate(ProductDTO p) 
         {
-            bool isAdd = false;
-            var existingProduct = FakeDatabase.Products.FirstOrDefault(prod => prod.Id == p.Id);
+            /*bool isAdd = false;
+            var existingProduct = Filebase.Current.Products.FirstOrDefault(prod => prod.Id == p.Id);
             if (existingProduct != null)
             {
                 existingProduct.Name = p.Name;
@@ -35,33 +35,37 @@ namespace jholl_eCommerce.API.EC
                 if (p.Id == 0)
                 {
                     isAdd = true;
-                    p.Id = FakeDatabase.NextProductId;
+                    p.Id = Filebase.Current.NextProductId;
                 }
             }
 
             if (isAdd)
             {
-                FakeDatabase.Products.Add(new Product(p));
-            }
+                Filebase.Current.Products.Add(new Product(p));
+            }*/
 
-            return p;
+            return new ProductDTO(Filebase.Current.AddOrUpdate(new Product(p)));
             
         }
 
         public async Task<ProductDTO> Delete(int id)
         {
-            var productToDelete = FakeDatabase.Products.FirstOrDefault(p => p.Id == id);
-            if (productToDelete == null)
-            {
-                return null;
-            }
-            FakeDatabase.Products.Remove(productToDelete);
-            return new ProductDTO(productToDelete); //when this becomes dto do this
+            return new ProductDTO(Filebase.Current.Delete(id));
+                
+            //    Products.FirstOrDefault(p => p.Id == id);
+            //if (productToDelete == null)
+            //{
+            //    return null;
+            //}
+            //Filebase.Current.Products.Remove(productToDelete);
+            //return new ProductDTO(productToDelete); //when this becomes dto do this
+
+            
         }
 
         public async Task<IEnumerable<ProductDTO>> Search(string? query)
         {
-            return FakeDatabase.Products
+            return Filebase.Current.Products
             .Where(p => p.Name != null && 
              p.Name.ToUpper().Contains(query?.ToUpper() ?? string.Empty)  ||
               (p.Description != null && p.Description.ToUpper().Contains(query?.ToUpper() ?? string.Empty)))
