@@ -26,6 +26,15 @@ namespace Amazon.Library.Services
             }
         }
 
+        public async Task<IEnumerable<ProductDTO>> Get()
+        {
+            var result = await new WebRequestHandler().Get("/Inventory");
+            var deserializedResult = JsonConvert.DeserializeObject<List<ProductDTO>>(result);
+
+            products = deserializedResult?.ToList() ?? new List<ProductDTO>();
+            return products;
+        }
+
       
 
         public async Task<ProductDTO> AddOrUpdate(ProductDTO p)
@@ -48,11 +57,6 @@ namespace Amazon.Library.Services
 
         private InventoryServiceProxy()
         {
-            
-            
-
-            //TODO add a webcall
-            
             var response = new WebRequestHandler().Get("/Inventory").Result;
             products = JsonConvert.DeserializeObject<List<ProductDTO>>(response);
         }

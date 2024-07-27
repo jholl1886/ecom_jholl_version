@@ -88,11 +88,11 @@ namespace eCommerce.MAUI.ViewModels
             }
         }
 
-        public void AddOrEdit()
+        public async void AddOrEdit()
         {
             if (Model != null)
             {
-                InventoryServiceProxy.Current.AddOrUpdate(Model);
+                 Model = await InventoryServiceProxy.Current.AddOrUpdate(Model); //fixes adds not showing up
             }
         }
 
