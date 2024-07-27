@@ -26,7 +26,7 @@ namespace Amazon.Library.Services
             }
         }
 
-        public async Task<IEnumerable<ProductDTO>> Get()
+        public async Task<IEnumerable<ProductDTO>> Get() //this is what fixed UI not updating after an add
         {
             var result = await new WebRequestHandler().Get("/Inventory");
             var deserializedResult = JsonConvert.DeserializeObject<List<ProductDTO>>(result);

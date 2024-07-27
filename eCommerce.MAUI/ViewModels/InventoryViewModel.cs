@@ -29,7 +29,7 @@ namespace eCommerce.MAUI.ViewModels
             } 
         }
 
-        public async void Refresh()
+        public async void Refresh() //being async and line 34 fixed UI not showing up after add in database
         {
             await InventoryServiceProxy.Current.Get();
             NotifyPropertyChanged(nameof(Products));
