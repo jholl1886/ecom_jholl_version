@@ -74,6 +74,11 @@ namespace eCommerce.MAUI.ViewModels
             await InventoryServiceProxy.Current.Search(new Query(Query));
             Refresh();
         }
+
+        public async void Import()
+        {
+            Shell.Current.GoToAsync("//Import");
+        }
     }
 }
  

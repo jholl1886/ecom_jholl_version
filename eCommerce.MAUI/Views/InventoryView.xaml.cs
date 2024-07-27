@@ -37,6 +37,11 @@ public partial class InventoryView : ContentPage
         (BindingContext as InventoryViewModel)?.Search();
     }
 
+    private void ImportClicked(object sender, EventArgs e)
+    {
+        (BindingContext as InventoryViewModel)?.Import();
+    }
+
     private void ContentPage_NavigatedTo(object sender, NavigatedToEventArgs e)
     {
         (BindingContext as InventoryViewModel).Refresh();

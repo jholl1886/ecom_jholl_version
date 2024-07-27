@@ -52,7 +52,10 @@
         <Button
             Text="Delete Product"
             Clicked="DeleteClicked"
-            
+            />
+        <Button
+            Text="Import Products"
+            Clicked="ImportClicked"
             />
         <Button
             Text="Cancel"

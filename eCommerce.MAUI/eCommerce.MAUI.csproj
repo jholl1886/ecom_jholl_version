@@ -68,6 +68,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Views\ImportView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\InventoryView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

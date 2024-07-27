@@ -28,5 +28,9 @@
         Title="Home"
         ContentTemplate="{DataTemplate views:TaxView}"
         Route="Tax" />
+    <ShellContent
+        Title="Import Wizard"
+        ContentTemplate="{DataTemplate views:ImportView}"
+        Route="Import" />
 
 </Shell>
