@@ -35,14 +35,14 @@ namespace eCommerce.MAUI.ViewModels
             {
                 while ((line = sr.ReadLine()) != null)
                 {
-                    if (string.IsNullOrWhiteSpace(line)) continue; // Skip empty or whitespace lines
+                    if (string.IsNullOrWhiteSpace(line)) continue; 
 
                     var tokens = line.Split('|');
 
-                    // Ensure the expected number of tokens is present
+                    
                     if (tokens.Length < 6)
                     {
-                        Console.WriteLine("Skipping line due to incorrect format or missing fields.");
+                        
                         continue;
                     }
 
@@ -62,19 +62,19 @@ namespace eCommerce.MAUI.ViewModels
                     }
                     catch (Exception ex)
                     {
-                        // Handle specific errors related to product creation or adding
-                        Console.WriteLine($"Error processing product line: {ex.Message}");
+                        
+                       
                     }
                 }
             }
             catch (Exception ex)
             {
-                // Handle exceptions, possibly logging the error
-                Console.WriteLine($"General error: {ex.Message}");
+                
+                
             }
             finally
             {
-                sr?.Dispose(); // Ensure the StreamReader is properly disposed of
+                sr?.Dispose(); 
             }
 
 
