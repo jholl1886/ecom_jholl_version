@@ -51,7 +51,7 @@ namespace jholl_eCommerce.API.EC
 
         public async Task<ProductDTO> Delete(int id)
         {
-            return new ProductDTO(Filebase.Current.Delete(id));
+            return new ProductDTO(new MSSQLContext().Delete(id));
                 
             //    Products.FirstOrDefault(p => p.Id == id);
             //if (productToDelete == null)

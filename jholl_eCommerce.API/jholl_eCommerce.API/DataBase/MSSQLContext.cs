@@ -93,5 +93,53 @@ namespace jholl_eCommerce.API.DataBase
             return products;
         }
 
+        public Product Delete(int id)
+        {
+            Product deletedProduct = null;
+
+            using (SqlConnection conn = new SqlConnection("Server=JACOBLAPTOP;Database=AMAZON;Trusted_Connection=yes;TrustServerCertificate=True"))
+            {
+                conn.Open();
+
+                // Fetch product details before deletion
+                using (SqlCommand fetchCmd = conn.CreateCommand())
+                {
+                    fetchCmd.CommandText = "SELECT Id, Name, Description, Price, Quantity, MarkDown, IsBogo FROM PRODUCT WHERE Id = @Id";
+                    fetchCmd.Parameters.Add(new SqlParameter("@Id", id));
+
+                    using (var reader = fetchCmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            deletedProduct = new Product
+                            {
+                                Id = (int)reader["Id"],
+                                Name = reader["Name"].ToString(),
+                                Description = reader["Description"].ToString(),
+                                Price = (decimal)reader["Price"],
+                                Quantity = (int)reader["Quantity"],
+                                MarkDown = (decimal)reader["MarkDown"],
+                                IsBogo = (bool)reader["IsBogo"]
+                            };
+                        }
+                    }
+                }
+
+                
+                using (SqlCommand deleteCmd = conn.CreateCommand())
+                {
+                    deleteCmd.CommandText = "Product.DeleteProduct";
+                    deleteCmd.CommandType = CommandType.StoredProcedure;
+                    deleteCmd.Parameters.Add(new SqlParameter("@Id", id));
+                    deleteCmd.ExecuteNonQuery();
+                }
+
+                conn.Close();
+            }
+
+            return deletedProduct;
+        }
+
+
     }
 }
