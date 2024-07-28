@@ -62,3 +62,18 @@ BEGIN
 END
 
 exec Product.DeleteProduct @Id = 7
+
+CREATE PROCEDURE Product.CheckProductExists
+@Id int,
+@Exists BIT OUTPUT
+AS
+BEGIN
+    -- Initialize the output variable
+    SET @Exists = 0
+
+    -- Check if a product with the given Id exists
+    IF EXISTS (SELECT 1 FROM PRODUCT WHERE Id = @Id)
+    BEGIN
+        SET @Exists = 1
+    END
+END

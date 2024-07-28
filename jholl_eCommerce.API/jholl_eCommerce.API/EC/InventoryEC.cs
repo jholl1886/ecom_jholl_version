@@ -45,7 +45,14 @@ namespace jholl_eCommerce.API.EC
                 Filebase.Current.Products.Add(new Product(p));
             }*/
 
-            return new ProductDTO(new MSSQLContext().AddProduct(new Product(p)));
+            if (p.Id == 0)
+            {
+                return new ProductDTO(new MSSQLContext().AddProduct(new Product(p)));
+            }
+            else
+            {
+                return new ProductDTO(new MSSQLContext().EditProduct(new Product(p)));
+            }
 
         }
 

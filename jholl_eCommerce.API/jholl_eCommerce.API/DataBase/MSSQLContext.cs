@@ -42,6 +42,40 @@ namespace jholl_eCommerce.API.DataBase
             return p;
         }
 
+        public Product EditProduct(Product p)
+        {
+            using (SqlConnection conn = new SqlConnection("Server=JACOBLAPTOP;Database=AMAZON;Trusted_Connection=yes;TrustServerCertificate=True"))
+            {
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "Product.UpdateProduct";
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add(new SqlParameter("@Id", p.Id));
+                    cmd.Parameters.Add(new SqlParameter("@Name", p.Name)); // Remove extra quotes
+                    cmd.Parameters.Add(new SqlParameter("@Description", p.Description)); // Ensure this is set correctly
+                    cmd.Parameters.Add(new SqlParameter("@Quantity", p.Quantity));
+                    cmd.Parameters.Add(new SqlParameter("@Price", p.Price));
+                    cmd.Parameters.Add(new SqlParameter("@MarkDown", p.MarkDown));
+                    cmd.Parameters.Add(new SqlParameter("@IsBogo", p.IsBogo));
+
+                    try
+                    {
+                        conn.Open();
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        // Handle or log the exception as needed
+                        Console.WriteLine(ex.Message); // For debugging
+                    }
+                }
+            }
+
+            return p;
+        }
+
+
         public List<Product> GetProducts()
         {
             var products = new List<Product>();
@@ -139,6 +173,40 @@ namespace jholl_eCommerce.API.DataBase
 
             return deletedProduct;
         }
+
+        public bool FindId(Product p)
+        {
+            var found = false;
+
+            using (SqlConnection conn = new SqlConnection("Server=JACOBLAPTOP;Database=AMAZON;Trusted_Connection=yes;TrustServerCertificate=True"))
+            {
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "Product.CheckProductExists";
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    // Add the input parameter for the Product ID
+                    cmd.Parameters.Add(new SqlParameter("@Id", p.Id));
+
+                    // Add the output parameter to capture the result
+                    SqlParameter existsParam = new SqlParameter("@Exists", SqlDbType.Bit)
+                    {
+                        Direction = ParameterDirection.Output
+                    };
+                    cmd.Parameters.Add(existsParam);
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+
+                    // Retrieve the output parameter value
+                    found = (bool)existsParam.Value;
+                }
+            }
+
+            return found;
+        }
+
+
 
 
     }
