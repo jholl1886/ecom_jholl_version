@@ -1,15 +1,13 @@
-
-
 --CREATE SCHEMA product
 
 CREATE PROCEDURE Product.InsertProduct
 @Name nvarchar(255)
-, @Description nvarchar(max)
-, @Quantity int
-, @Price numeric(10,2)
-, @Id int output
-, @MarkDown numeric(10,2)
-, @IsBogo BIT
+,@Description nvarchar(max)
+,@Quantity int
+,@Price numeric(10,2)
+,@Id int output
+,@MarkDown numeric(10,2)
+,@IsBogo BIT
 AS
 BEGIN
 	INSERT INTO PRODUCT ([Name],[Description],[Price],[Quantity],[MarkDown],[IsBogo]) 
@@ -28,8 +26,8 @@ exec Product.InsertProduct @Name = 'SP Product'
 , @IsBogo = 0
 
 select @newId
-
 select * from Product
+
 
 CREATE PROCEDURE Product.UpdateProduct
 @Name nvarchar(255)
@@ -62,18 +60,3 @@ BEGIN
 END
 
 exec Product.DeleteProduct @Id = 7
-
-CREATE PROCEDURE Product.CheckProductExists
-@Id int,
-@Exists BIT OUTPUT
-AS
-BEGIN
-    -- Initialize the output variable
-    SET @Exists = 0
-
-    -- Check if a product with the given Id exists
-    IF EXISTS (SELECT 1 FROM PRODUCT WHERE Id = @Id)
-    BEGIN
-        SET @Exists = 1
-    END
-END
